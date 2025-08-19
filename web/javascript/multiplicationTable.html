@@ -1,0 +1,45 @@
+<html>
+
+<head>
+
+    <title>QA</title>
+
+    <style>
+
+        .tableColumn { width: 3em; float: left; border: 1px solid black; text-align:center;}
+
+        .tableRow{  clear:left; }
+
+    </style>   
+
+</head>
+
+<body>
+
+    <script>
+
+        var table = "<div>"; // <!-- Begin starting table string -->
+
+        for (var row = 1; row <= 10; row++) { // <!-- For each new row -->
+
+            table += "<div class='tableRow'>"; // <!-- Start a new row -->
+
+            for (var column = 1; column <= 10; column++) { // <!-- For each new column -->
+
+                table += "<div class='tableColumn'>" + row * column + "</div>"; // <!-- Build up each cell in turn -->
+
+            }
+
+            table += "</div>";
+
+        }
+
+        table += "</div>" // <!-- Close table string -->
+
+        document.write(table); // <!-- write table back to document -->
+
+    </script>
+
+</body>
+
+</html>

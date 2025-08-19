@@ -1,0 +1,50 @@
+<html>
+
+<head>
+
+    <title>QA</title>
+
+    <style>
+
+        .tableColumn { width: 3em; float: left; border: 1px solid black; text-align:center;}
+
+        .tableRow{  clear:left; }
+
+    </style>   
+
+</head>
+
+<body>
+	<label for="columns">columns:</label>
+    <input type="text" id="columns"><br><br>
+    <label for="rows">rows:</label>
+    <input type="text" id="rows"><br><br>
+    <button onclick="makeTable(parseInt(document.getElementById('rows').value), parseInt(document.getElementById('columns').value)">Make Table</button>
+	<div id="tableContainer"></div> <!-- Div for Table -->
+    <script>
+		function makeTable(rows, columns){
+			var table = "<div>"; // <!-- Begin starting table string -->
+
+			for (var row = 1; row <= rows; row++) { // <!-- For each new row -->
+
+				table += "<div class='tableRow'>"; // <!-- Start a new row -->
+
+				for (var column = 1; column <= columns; column++) { // <!-- For each new column -->
+
+					table += "<div class='tableColumn'>" + row * column + "</div>"; // <!-- Build up each cell in turn -->
+
+				}
+
+				table += "</div>";
+
+			}
+
+			table += "</div>" // <!-- Close table string -->
+
+			document.getElementById("tableContainer").innerHTML = table; // <!-- write table back to div -->
+		}
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tasks</title>
+	<style>
+
+	</style>
+</head>
+<body onload="loadTasks()">
+	<h2>Task Manager</h2>
+	<label for="taskInput">Task Description:</label>
+	<input type="text" id="taskInput" placeholder="Enter a task"><br />
+
+	<label for="priorityInput">Priority (1 = highest, 5 = lowest):</label>
+	<input type="number" id="priorityInput" min="1" max="5" value="3">
+
+	<button onclick="addTask()">Add Task</button><br>
+
+	
+	
+	<h3>Task List</h3>
+	<ul id="taskList"></ul><br><br>
+
+	<button onclick="saveTasks()">Save Tasks</button><br><br>
+	<button onclick="clearTasks()">Clear Tasks</button>
+	<script>
+		let tasks = [];
+		
+		class Task {
+		  constructor(pri, desc) {
+			this.pri = pri;
+			this.desc = desc;
+		  }
+		}
+		
+		function saveTasks(){
+			localStorage.setItem("taskItems", JSON.stringify(tasks));
+		}
+		
+		function clearTasks(){
+			tasks = [];
+			localStorage.removeItem("taskItems");
+			display();
+		}
+		function loadTasks(){
+			let items = localStorage.getItem("taskItems");
+			tasks = items ? JSON.parse(items) : [];
+			display();
+		}
+		
+		function addTask() {
+			const taskInput = document.getElementById("taskInput");
+			const taskPriority = document.getElementById("priorityInput");
+			
+			
+			if (taskInput.value.trim() === "") {
+				alert("Enter a task");
+				return;
+			}
+			if (taskPriority.value < 1 || taskPriority.value > 5) {
+				alert("Priority must be between 1-5");
+				return;
+			}
+			
+			const task = new Task(parseInt(taskPriority.value), taskInput.value);
+			
+			tasks.push(task);
+
+			tasks.sort((a, b) => a.pri - b.pri);
+
+			display();
+
+			//taskInput.value = "";
+		}
+
+		function removeTask(pos) {
+			tasks.splice(pos, 1);
+			display();
+		}
+		
+		function display() {
+			const list = document.getElementById("taskList");
+			list.innerHTML = "";
+
+			tasks.forEach((task, pos) => {
+				const listItem = document.createElement("li");
+				listItem.textContent = task.pri + ". " + task.desc;
+
+				const completeButton = document.createElement("button");
+				completeButton.textContent = "Complete";
+				completeButton.onclick = function () {
+					removeTask(pos);
+				}
+
+				listItem.appendChild(completeButton);
+				list.appendChild(listItem);
+			});
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Day</title>
+</head>
+<body>
+		
+    <h2>Day getter</h2>    
+    <button onclick="getDay()">Get Day</button><br><br>
+    <button onclick="sumRange()">Sum range</button>
+    <button onclick="odds()">Odds to console</button>
+    <script>
+	
+		function sumRange(){
+		var number = 1;
+		var sum = 0;
+			while (number <= 100) {
+				sum += number;
+				number++;
+			}
+			alert(sum);
+		}
+		
+		function odds(){
+			for (let i = 0; i <= 100; i++) {
+				if (i % 2 == 1){
+					console.log(i);
+				}
+			}
+			
+		}
+		
+		
+		
+		function getDay() {
+            var day;
+			switch(new Date().getDay()){
+				case 0:
+					day = "Sunday";
+					break;
+				case 1:
+					day = "Monday";
+					break;
+				case 2:
+					day = "Tuesday";
+					break;
+				case 3:
+					day = "Wednesday";
+					break;
+				case 4:
+					day = "Thursday";
+					break;
+				case 5:
+					day = "Friday";
+					break;
+				case 6:
+					day = "Saturday";
+					break;
+				default:
+					day = "Invalid day";
+			}
+			alert(day);
+		}
+    </script>
+	
+</body>
+</html>
